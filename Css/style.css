@@ -1,4 +1,5 @@
 
+
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Righteous&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Caption:wght@400;700&family=Pacifico&family=Righteous&display=swap');
@@ -85,7 +86,7 @@ h1, h2, h3, h4, h5, h6, p {
     --bs-btn-hover-border-color: #6e8018;
 }
 .btn-delete {
-    --bs-btn-color: #fff;
+  color: #fff;
     --bs-btn-bg: #eb1d36;
     --bs-btn-border-color: #eb1d36;
     --bs-btn-hover-color: #fff;

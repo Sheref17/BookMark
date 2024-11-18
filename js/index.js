@@ -1,86 +1,50 @@
-var siteName = document.getElementById('siteName').value;
-var siteURL = document.getElementById('siteURL').value;
+var siteName = document.getElementById('siteName');
+var siteURL = document.getElementById('siteURL');
+var bookMark = [];
+
+// Load existing bookmarks from localStorage
+if (localStorage.getItem("Bookmarks") !== null) {
+    bookMark = JSON.parse(localStorage.getItem("Bookmarks"));
+    displaySites();
+}
+
 function addSite() {
-
-
-
-    if (!validateForm(siteName, siteURL)) {
-        return;
-    }
-
-    var bookmark = {
-        name: siteName,
-        url: siteURL
+    var site = {
+        name: siteName.value,
+        url: siteURL.value
     };
 
+    
+    if (!validateInput(site.name, site.url)) {
+        return; 
+    }
 
-    let bookmarks = localStorage.getItem('bookmarks');
-    bookmarks = bookmarks ? JSON.parse(bookmarks) : [];
+  
+    bookMark.push(site);
 
 
-    bookmarks.push(bookmark);
+    localStorage.setItem("Bookmarks", JSON.stringify(bookMark));
 
 
-    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-
-   
     document.getElementById('siteName').value = '';
     document.getElementById('siteURL').value = '';
 
-   
-    clearBookmarks();
+
+    displaySites();
 }
 
 
-function deleteBookmark(index) {
- e
-    let bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
-
+function validateInput(name, url) {
     
-    bookmarks.splice(index, 1);
-
-
-    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-
-    fetchBookmarks();
-}
-
-function clearBookmarks() {
-
-    var bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
-
-
-    var allSiteBody = document.getElementById('allSiteBody');
-
-
-    allSiteBody.innerHTML = '';
-
-
-    bookmarks.forEach((bookmark, index) => {
-        allSiteBody.innerHTML += `
-            <tr>
-                <td>${index + 1}</td>
-                <td>${bookmark.name}</td>
-                <td><a class="btn btn-visit" href="${bookmark.url}" target="_blank">Visit</a></td>
-                <td><button class="btn btn-delete" onclick="deleteBookmark(${index})">Delete</button></td>
-            </tr>
-        `;
-    });
-}
-
-
-function validateForm(siteName, siteURL) {
-    if (!siteName || !siteURL) {
-        alert('Please fill the fields in the right way sitename must be 3character or above and url must be in right way like https://www.facebook.com/.');
+    if (name.length < 3) {
+        alert('Please enter a site name with at least 3 characters.');
         return false;
     }
-    
 
-    var expression = /^(http|https):\/\/[^ "]+$/;
-    var regex = new RegExp(expression);
-
-    if (!siteURL.match(regex)) {
-        alert('Please enter a valid URL.');
+   
+    const urlPattern = /^(https?:\/\/[^\s$.?#].[^\s]*)$/;
+    if (!urlPattern.test(url)) {
+        alert('Please enter a valid URL starting with http or https.');
         return false;
     }
 
@@ -88,4 +52,29 @@ function validateForm(siteName, siteURL) {
 }
 
 
-document.addEventListener('DOMContentLoaded', fetchBookmarks);
+function displaySites() {
+    var cartona = "";
+    for (var i = 0; i < bookMark.length; i++) {
+        cartona += `  
+        <tr>
+            <td>${i + 1}</td>
+            <td>${bookMark[i].name}</td>
+            <td><a class="btn btn-visit" href="${bookMark[i].url}" target="_blank">Visit</a></td>
+            <td><button onclick="deleteSite(${i})" class="btn btn-delete">Delete</button></td>
+        </tr>
+        `;
+    }
+    document.getElementById("allSiteBody").innerHTML = cartona;
+}
+
+function deleteSite(index) {
+    bookMark.splice(index, 1);
+    localStorage.setItem("Bookmarks", JSON.stringify(bookMark));
+    displaySites();
+}
+
+
+function clear() {
+    siteName.value = null;
+    siteURL.value = null;
+}

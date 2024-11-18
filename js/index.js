@@ -59,8 +59,8 @@ function displaySites() {
         <tr>
             <td>${i + 1}</td>
             <td>${bookMark[i].name}</td>
-            <td><a class="btn btn-visit" href="${bookMark[i].url}" target="_blank">Visit</a></td>
-            <td><button onclick="deleteSite(${i})" class="btn btn-delete">Delete</button></td>
+            <td><a class="btn btn-visit" href="${bookMark[i].url}" target="_blank"><i class="fa-solid fa-eye pe-2"></i>Visit</a></td>
+            <td><button onclick="deleteSite(${i})" class="btn btn-delete"><i class="fa-solid fa-trash-can"></i>Delete</button></td>
         </tr>
         `;
     }

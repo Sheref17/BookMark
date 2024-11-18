@@ -34,6 +34,8 @@ body {
     font-family: "Righteous", cursive; 
     font-size: 25px; 
     background-image: linear-gradient(to right, #3ca55c, #b5ac49); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 
  }
 

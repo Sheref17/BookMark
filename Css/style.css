@@ -30,13 +30,13 @@ body {
     transition: .35s;
 }
 .titel:hover::before {height: 50%;}
-#addurl h2{
-    font-family: "Righteous", cursive;
-    font-size: 25px;
-    background-image: linear-gradient(to right, #3ca55c, #b5ac49);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+ h2 {
+    font-family: "Righteous", cursive; 
+    font-size: 25px; 
+    background-image: linear-gradient(to right, #3ca55c, #b5ac49); 
+
+ }
+
 .form-control {
    border-width: 1px;
     padding: 6px 12px;
